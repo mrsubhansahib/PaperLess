@@ -9,4 +9,4 @@
 <meta name="theme-color" content="#ffffff">
 
 <!-- App favicon -->
-<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="shortcut icon" href="/images/favicon.png">
