@@ -9,6 +9,8 @@
 
 <body @yield('body-attribuet')>
 
+    @include('layouts.partials.loader')  
+
     @yield('content')
 
     @include('layouts.partials/vendor-scripts')

@@ -9,6 +9,8 @@
 
 <body>
 
+    @include('layouts.partials.loader')
+
     <div class="app-wrapper">
 
         @include('layouts.partials/sidebar')
