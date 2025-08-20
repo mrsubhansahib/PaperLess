@@ -27,21 +27,27 @@ class="authentication-bg"
                                 </p>
                         </div>
 
-                        <form action="{{ route('any', 'index') }}" class="mt-4">
+                        <form action="{{ route('register') }}" class="mt-4" method="POST">
+                            @csrf
                             <div class="mb-3">
                                 <label class="form-label" for="example-name">Name</label>
-                                <input type="name" id="example-name" name="example-name" class="form-control"
+                                <input type="name" id="example-name" name="name" class="form-control"
                                     placeholder="Enter your name">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="example-email">Email</label>
-                                <input type="email" id="example-email" name="example-email" class="form-control"
+                                <input type="email" id="example-email" name="email" class="form-control"
                                     placeholder="Enter your email">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="example-password">Password</label>
-                                <input type="text" id="example-password" class="form-control"
+                                <input type="password" id="example-password" name="password" class="form-control"
                                     placeholder="Enter your password">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="example-password-confirm">Confirm Password</label>
+                                <input type="password" id="example-password-confirm" class="form-control" name="password_confirmation"
+                                    placeholder="Confirm your password">
                             </div>
                             <div class="mb-3">
                                 <div class="form-check">
