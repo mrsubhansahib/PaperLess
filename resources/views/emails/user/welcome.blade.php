@@ -9,7 +9,7 @@ Your account has been successfully created, and you’re now part of a growing c
 - Access resources and tools designed to help you succeed  
 - Stay tuned for updates, tips, and opportunities from our team  
 
-<x-mail::button :url="route('login')">
+<x-mail::button :url="route('auth.signin')">
 Login to Your Account
 </x-mail::button>
 

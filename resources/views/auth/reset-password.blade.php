@@ -21,19 +21,26 @@
                                         <img src="/images/logo-light.png" height="28" alt="logo light">
                                     </a>
                                 </div>
-                                <h4 class="fw-bold text-dark mb-2">Trouble logging in?</h4>
-                                    <p class="text-muted">Enter your email address and we'll send you an email
-                                        with instructions to reset your password.</p>
+                                <h4 class="fw-bold text-dark mb-2">Reset Password</h3>
+                                    <p class="text-muted">Your password must be at least 6 characters and should include a combination of numbers, letters and special characters (!$@%).</p>
                             </div>
-                            <form action="{{ route('password.email') }}" method="POST" class="mt-4">
+                            <form action="{{ route('password.update') }}" method="POST" class="mt-4">
                                 @csrf
+                                <input type="hidden" name="token" value="{{ $request->route('token') }}">
+                                <input type="hidden" name="email" value="{{ $request->email }}">
+                               <div class="mb-3">
+                                    <label class="form-label" for="example-password">New Password</label>
+                                    <input type="password" id="example-password" name="password" class="form-control"
+                                        placeholder="Enter your password">
+                                </div>
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email Address</label>
-                                    <input type="email" class="form-control" id="email" name="email"
-                                        placeholder="Enter your email">
+                                    <label class="form-label" for="example-password-confirm">Confirm Password</label>
+                                    <input type="password" id="example-password-confirm" class="form-control"
+                                        name="password_confirmation" placeholder="Confirm your password">
                                 </div>
                                 <div class="d-grid">
-                                    <button class="btn btn-dark btn-lg fw-medium" type="submit">Send login link</button>
+                                    <button class="btn btn-dark btn-lg fw-medium" type="submit">Reset
+                                        Password</button>
                                 </div>
                             </form>
                         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use App\Rules\HasValidMx;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,11 +34,13 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'name'     => 'required|string|max:255',
+            'email' => ['required','string','email:rfc','max:255','unique:users,email', new HasValidMx],
             'password' => 'required|string|confirmed|min:8',
+        ], [
+            'email.email'  => 'Please enter a valid email address.',
+            'email.unique' => 'This email is already registered.',
         ]);
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
