@@ -3,7 +3,7 @@
 
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-    <?php echo $__env->make('layouts.partials.page-title', ['title' => 'Taplox', 'subtitle' => 'Dashboard'], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    <?php echo $__env->make('layouts.partials.page-title', ['title' => 'PaperLess', 'subtitle' => 'Dashboard'], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     <div class="row">
         <?php
 $__split = function ($name, $params = []) {
