@@ -10,6 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class RegisteredUserController extends Controller
 {
@@ -36,10 +37,15 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name'     => 'required|string|max:255',
             'email' => ['required','string','email:rfc','max:255','unique:users,email', new HasValidMx],
-            'password' => 'required|string|confirmed|min:8',
+            'password' => ['required','string','confirmed',Password::min(8)->letters()->numbers()->symbols()],
         ], [
             'email.email'  => 'Please enter a valid email address.',
             'email.unique' => 'This email is already registered.',
+            'password.letters' => 'The password must contain at least one letter.',
+            'password.numbers' => 'The password must contain at least one number.',
+            'password.symbols' => 'The password must contain at least one symbol.',
+            'password.min' => 'The password must be at least 8 characters long.',
+            'password.confirmed' => 'The password confirmation does not match.',
         ]);
         $user = User::create([
             'name' => $request->name,
