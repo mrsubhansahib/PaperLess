@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <p class="text-center mt-4 text-white text-opacity-50">Back to
-                        <a href="{{ route('login') }}" class="text-decoration-none text-white fw-bold">Sign In</a>
+                        <a href="{{ route('signin') }}" class="text-decoration-none text-white fw-bold">Sign In</a>
                     </p>
                 </div>
             </div>

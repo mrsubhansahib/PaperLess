@@ -30,7 +30,9 @@ class PasswordResetLinkController extends Controller
     {
         // dd(123);
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|exists:users,email',
+        ],[
+            'email.exists'=>'This email is not registered.'
         ]);
         // dd($request->all());
 

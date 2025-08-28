@@ -24,14 +24,17 @@ class="authentication-bg"
                             <h4 class="fw-bold text-dark mb-2">Welcome Back!</h3>
                                 <p class="text-muted">Sign in to your account to continue</p>
                         </div>
-                        <form method="POST" action="{{ route('login') }}" class="mt-4">
+                        <form method="POST" action="{{ route('signin') }}" class="mt-4">
 
                             @csrf
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="user@demo.com"
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="user@demo.com"
                                     placeholder="Enter your email">
+                                    @error('email')
+                                        <div class="text-danger text-sm mt-1">{{ $message }}</div>
+                                    @enderror
                             </div>
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between align-items-center">
@@ -39,11 +42,14 @@ class="authentication-bg"
                                     <a href="{{ route('password.request') }}"
                                         class="text-decoration-none small text-muted">Forgot password?</a>
                                 </div>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="password"
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="password"
                                     placeholder="Enter your password">
+                                    @error('password')
+                                        <div class="text-danger text-sm mt-1">{{ $message }}</div>
+                                    @enderror
                             </div>
                             <div class="form-check mb-3">
-                                <input type="checkbox" class="form-check-input" id="remember-me">
+                                <input type="checkbox" required class="form-check-input" id="remember-me">
                                 <label class="form-check-label" for="remember-me">Remember me</label>
                             </div>
                             <div class="d-grid">
@@ -53,7 +59,7 @@ class="authentication-bg"
                     </div>
                 </div>
                 <p class="text-center mt-4 text-white text-opacity-50">Don't have an account?
-                    <a href="{{ route('register') }}"
+                    <a href="{{ route('signup') }}"
                         class="text-decoration-none text-white fw-bold">Sign Up</a>
                 </p>
             </div>

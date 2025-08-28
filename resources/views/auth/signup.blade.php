@@ -27,7 +27,7 @@
                                     </p>
                             </div>
 
-                            <form action="{{ route('register') }}" class="mt-4" method="POST">
+                            <form action="{{ route('signup') }}" class="mt-4" method="POST">
                                 @csrf
                                 <div class="mb-3">
                                     <label class="form-label" for="example-name">Name</label>
@@ -40,7 +40,7 @@
                                         class="form-control @error('email') is-invalid @enderror"
                                         placeholder="Enter your email">
                                     @error('email')
-                                        <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                                        <div class="text-danger text-sm mt-1">{{ $message }}</div>
                                     @enderror
 
                                     @if (session('mail_warning'))
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <p class="text-center mt-4 text-white text-opacity-50">I already have an account
-                        <a href="{{ route('login') }}" class="text-decoration-none text-white fw-bold">Sign In</a>
+                        <a href="{{ route('signin') }}" class="text-decoration-none text-white fw-bold">Sign In</a>
                     </p>
                 </div>
             </div>

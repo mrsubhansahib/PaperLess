@@ -22,15 +22,19 @@
                                     </a>
                                 </div>
                                 <h4 class="fw-bold text-dark mb-2">Trouble logging in?</h4>
-                                    <p class="text-muted">Enter your email address and we'll send you an email
-                                        with instructions to reset your password.</p>
+                                <p class="text-muted">Enter your email address and we'll send you an email
+                                    with instructions to reset your password.</p>
                             </div>
                             <form action="{{ route('password.email') }}" method="POST" class="mt-4">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email Address</label>
-                                    <input type="email" class="form-control" id="email" name="email"
-                                        placeholder="Enter your email">
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                        id="email" name="email" placeholder="Enter your email">
+                                    @error('email')
+                                        <div class="text-danger text-sm mt-1">{{ $message }}</div>
+                                    @enderror
+
                                 </div>
                                 <div class="d-grid">
                                     <button class="btn btn-dark btn-lg fw-medium" type="submit">Send login link</button>
@@ -39,7 +43,7 @@
                         </div>
                     </div>
                     <p class="text-center mt-4 text-white text-opacity-50">Back to
-                        <a href="{{ route('login') }}" class="text-decoration-none text-white fw-bold">Sign In</a>
+                        <a href="{{ route('signin') }}" class="text-decoration-none text-white fw-bold">Sign In</a>
                     </p>
                 </div>
             </div>

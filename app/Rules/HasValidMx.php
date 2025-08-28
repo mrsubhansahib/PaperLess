@@ -16,7 +16,7 @@ class HasValidMx implements ValidationRule
     {
          $domain = substr(strrchr($value, '@'), 1);
         if (!$domain || !dns_get_record($domain, DNS_MX)) {
-            $fail('We could not find a valid mail server (MX) for this email.');
+            $fail('This is an invalid email.');
         }
     }
 }

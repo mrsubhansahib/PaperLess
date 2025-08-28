@@ -12,39 +12,39 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/auth/signup', [RegisteredUserController::class, 'create'])
     ->middleware('guest')
-    ->name('register');
+    ->name('signup');
 
 Route::post('/auth/signup', [RegisteredUserController::class, 'store'])
     ->middleware('guest');
 
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+Route::get('/auth/signin', [AuthenticatedSessionController::class, 'create'])
     ->middleware('guest')
-    ->name('login');
+    ->name('signin');
 
-Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+Route::post('/auth/signin', [AuthenticatedSessionController::class, 'store'])
     ->middleware('guest');
 
 //Admin login
-Route::get('/admin-login', [AuthenticatedSessionController::class, 'index'])
+Route::get('/auth/admin-signin', [AuthenticatedSessionController::class, 'index'])
     ->middleware('guest')
-    ->name('admin.login');
+    ->name('admin.signin');
 
-Route::post('/admin-login', [AuthenticatedSessionController::class, 'store'])
+Route::post('/auth/admin-signin', [AuthenticatedSessionController::class, 'store'])
     ->middleware('guest');
 
-Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
+Route::get('/auth/forgot-password', [PasswordResetLinkController::class, 'create'])
     ->middleware('guest')
     ->name('password.request');
 
-Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
+Route::post('/auth/forgot-password', [PasswordResetLinkController::class, 'store'])
     ->middleware('guest')
     ->name('password.email');
 
-Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
+Route::get('/auth/reset-password/{token}', [NewPasswordController::class, 'create'])
     ->middleware('guest')
     ->name('password.reset');
 
-Route::post('/reset-password', [NewPasswordController::class, 'store'])
+Route::post('/auth/reset-password', [NewPasswordController::class, 'store'])
     ->middleware('guest')
     ->name('password.update');
 
