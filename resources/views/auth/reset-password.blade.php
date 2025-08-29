@@ -22,7 +22,7 @@
                                     </a>
                                 </div>
                                 <h4 class="fw-bold text-dark mb-2">Reset Password</h3>
-                                    <p class="text-muted">Your password must be at least 6 characters and should include a combination of numbers, letters and special characters (!$@%).</p>
+                                    <p class="text-muted">Your password must be at least 8 characters and should include a combination of numbers, letters and special characters (!$@%).</p>
                             </div>
                             <form action="{{ route('password.update') }}" method="POST" class="mt-4">
                                 @csrf
@@ -30,8 +30,11 @@
                                 <input type="hidden" name="email" value="{{ $request->email }}">
                                <div class="mb-3">
                                     <label class="form-label" for="example-password">New Password</label>
-                                    <input type="password" id="example-password" name="password" class="form-control"
+                                    <input type="password" id="example-password" name="password" class="form-control @error('password') is-invalid @enderror"
                                         placeholder="Enter your password">
+                                    @error('password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="example-password-confirm">Confirm Password</label>

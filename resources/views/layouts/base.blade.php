@@ -9,11 +9,12 @@
 
 <body @yield('body-attribuet')>
 
-    @include('layouts.partials.loader')  
+    @include('layouts.partials.loader')
 
     @yield('content')
 
     @include('layouts.partials/vendor-scripts')
+    @include('layouts.partials.alert') {{-- <-- added --}}
 
 </body>
 
