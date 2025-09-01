@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password as PasswordRule;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
@@ -34,7 +35,10 @@ class NewPasswordController extends Controller
         $request->validate([
             'token' => 'required',
             'email' => 'required|email',
-            'password' => 'required|string|confirmed|min:8',
+            'password' => ['required', 'string', PasswordRule::min(8)->letters()->numbers()->symbols()],
+        ], [
+            'password' => 'The password must be at least 8 characters long and contain letters, numbers, and symbols.',
+            'password.confirmed' => 'The password confirmation does not match.',
         ]);
 
         // Here we will attempt to reset the user's password. If it is successful we
@@ -51,13 +55,16 @@ class NewPasswordController extends Controller
                 event(new PasswordReset($user));
             }
         );
+        if ($status === Password::PASSWORD_RESET) {
+            return redirect()->route('signin')->with('success', 'Password has been reset successfully. You can now log in with your new password.');
+        }
 
         // If the password was successfully reset, we will redirect the user back to
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
         return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('signup')->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                            ->withErrors(['email' => __($status)]);
+            ? redirect()->route('signin')->with('status', __($status))
+            : back()->withInput($request->only('email'))
+            ->withErrors(['email' => __($status)]);
     }
 }

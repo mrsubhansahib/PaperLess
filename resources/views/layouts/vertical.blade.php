@@ -32,7 +32,7 @@
 
     @include('layouts.partials/vendor-scripts')
 
-
+    @include('layouts.partials.alert')
 </body>
 
 </html>

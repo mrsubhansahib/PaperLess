@@ -31,12 +31,12 @@
                                 @csrf
                                 <div class="mb-3">
                                     <label class="form-label" for="example-name">Name</label>
-                                    <input type="name" id="example-name" name="name" class="form-control"
+                                    <input type="name" id="example-name" name="name" class="form-control" value="{{old('name')}}"
                                         placeholder="Enter your name">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="example-email">Email</label>
-                                    <input type="email" id="example-email" name="email"
+                                    <input type="email" id="example-email" name="email" value="{{old('email')}}"
                                         class="form-control @error('email') is-invalid @enderror"
                                         placeholder="Enter your email">
                                     @error('email')
@@ -51,8 +51,11 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="example-password">Password</label>
-                                    <input type="password" id="example-password" name="password" class="form-control"
+                                    <input type="password" id="example-password" name="password" class="form-control @error('password') is-invalid @enderror"
                                         placeholder="Enter your password">
+                                    @error('password')
+                                        <div class="text-danger text-sm mt-1">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="example-password-confirm">Confirm Password</label>

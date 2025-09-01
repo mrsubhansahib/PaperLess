@@ -31,8 +31,8 @@ class PasswordResetLinkController extends Controller
         // dd(123);
         $request->validate([
             'email' => 'required|email|exists:users,email',
-        ],[
-            'email.exists'=>'This email is not registered.'
+        ], [
+            'email.exists' => 'This email is not registered.'
         ]);
         // dd($request->all());
 
@@ -42,10 +42,13 @@ class PasswordResetLinkController extends Controller
         $status = Password::sendResetLink(
             $request->only('email')
         );
-
+        if ($status === Password::RESET_LINK_SENT) {
+            // use the key our toast system expects:
+            return back()->with('success', 'Password reset link sent. Please check your email.');
+        }
         return $status == Password::RESET_LINK_SENT
-                    ? back()->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                            ->withErrors(['email' => __($status)]);
+            ? back()->with('status', __($status))
+            : back()->withInput($request->only('email'))
+            ->withErrors(['email' => __($status)]);
     }
 }

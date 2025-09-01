@@ -11,7 +11,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rules\Password;
 
 class RegisteredUserController extends Controller
 {
@@ -37,11 +37,13 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name'     => 'required|string|max:255',
-            'email' => ['required','string','email:rfc','max:255','unique:users,email', new HasValidMx],
-            'password' => 'required|string|confirmed|min:8',
+            'email' => ['required', 'string', 'email:rfc', 'max:255', 'unique:users,email', new HasValidMx],
+           'password' => ['required', 'string', 'confirmed', Password::min(8)->letters()->numbers()->symbols()],
         ], [
             'email.email'  => 'Please enter a valid email address.',
             'email.unique' => 'This email is already registered.',
+            'password' => 'The password must be at least 8 characters long and contain letters, numbers, and symbols.',
+            'password.confirmed' => 'The password confirmation does not match.',
         ]);
         $user = User::create([
             'name' => $request->name,
@@ -53,8 +55,6 @@ class RegisteredUserController extends Controller
         // send mail to user
         Mail::to($user->email)->send(new WelcomeUserMail($user));
 
-        Auth::login($user);
-
-        return redirect('index')->with('success', 'You have successfully registered!');
+        return redirect()->back()->with('success', 'Please verify your email to continue!');
     }
 }
