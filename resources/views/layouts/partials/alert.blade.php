@@ -55,7 +55,7 @@
         const stack = document.getElementById('toast-stack');
 
         function show(type = 'info', message = '', {
-            timeout = 5000
+            timeout = 7000
         } = {}) {
             const icons = {
                 success: 'bx bx-check-shield',

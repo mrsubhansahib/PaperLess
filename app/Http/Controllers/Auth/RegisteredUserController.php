@@ -55,5 +55,6 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect('index')->with('success', 'You have successfully registered!');
+        
     }
 }
