@@ -52,9 +52,6 @@ class RegisteredUserController extends Controller
         // dd($user);
         event(new Registered($user));
 
-        Auth::login($user);
-
-        return redirect('index')->with('success', 'You have successfully registered!');
-        
+        return redirect()->back()->with('success', 'Please verify your email to continue!');
     }
 }
